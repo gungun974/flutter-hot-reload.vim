@@ -1,7 +1,7 @@
 function! hotReload#TriggerHotReload() abort
     if $SHELL =~? 'fish'
-        silent execute '!kill -SIGUSR1 (pgrep -f "[f]lutter_tool.*run")'
+      silent !kill -SIGUSR1 (ps aux | grep -E "[f]lutter_tool.*run" | grep -v "build_runner" | grep -v "slang" | awk '{print $2}')
     else
-        silent execute '!kill -SIGUSR1 $(pgrep -f "[f]lutter_tool.*run")'
+      silent !kill -SIGUSR1 $(ps aux | grep -E "[f]lutter_tool.*run" | grep -v "build_runner" | grep -v "slang" | awk '{print $2}')
     endif
 endfunction
